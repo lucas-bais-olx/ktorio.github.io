@@ -22,10 +22,27 @@ compilation output and all required dependencies into a single JAR file, and app
 function to run first. 
 
 First, you need to apply it in your `build.gradle` file:
-
 ```groovy
-apply plugin: "com.github.johnrengelman.shadow"
-``` 
+buildscript {
+    ...
+    repositories {
+        ...
+        maven {
+          url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        ...
+        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.1"
+    }
+
+}
+
+apply plugin: 'application' // apply application plugin (needed to set mainClassName)
+apply plugin: "com.github.johnrengelman.shadow" // apply shadow plugin
+
+```
+
 
 Then, specify main class so it knows what to run when you will tell java inside docker image to run your jar:
 
